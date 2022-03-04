@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Announcement from '../components/Announcement';
 import Products from '../components/Products';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import { mobile } from '../responsive';
+import { useState } from 'react';
 
 const Container = styled.div``;
 
@@ -36,6 +38,30 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const location = useLocation();
+  console.log(location);
+  const category = location.pathname.split('/')[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState('newest');
+
+
+  const handleFilters = (event) => {
+    const value = event.target.value;
+
+    setFilters({
+      ...filters,
+      [event.target.name]: value,
+    })
+  }
+
+  const handleSort = (event) => {
+    const value = event.target.value;
+
+    setSort(value);
+  }
+
+  //console.log('filter:', filter, '\nsort:', sort);
+
   return (
     <Container>
       <Navbar/>
@@ -44,34 +70,34 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select>
-            <Option selected disabled>Color</Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
+          <Select name='color' onChange={handleFilters}>
+            <Option disabled>Color</Option>
+            <Option>white</Option>
+            <Option>black</Option>
+            <Option>red</Option>
+            <Option>blue</Option>
+            <Option>yellow</Option>
+            <Option>green</Option>
           </Select>
-          <Select>
-            <Option selected disabled>Size</Option>
-            <Option>XSmall</Option>
-            <Option>Small</Option>
-            <Option>Medium</Option>
-            <Option>Large</Option>
-            <Option>XLarge</Option>
+          <Select name= 'size' onChange={handleFilters}>
+            <Option disabled>Size</Option>
+            <Option value = 'xs'>XSmall</Option>
+            <Option value = 's'>Small</Option>
+            <Option value = 'm'>Medium</Option>
+            <Option value = 'l'>Large</Option>
+            <Option value = 'xl'>XLarge</Option>
           </Select>
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option selected disabled>Newest</Option>
-            <Option>Price (asc)</Option>
-            <Option>Price (desc)</Option>
+          <Select name='order' onChange={handleSort}>
+            <Option value='newest'>Newest</Option>
+            <Option value='asc'>Price (asc)</Option>
+            <Option value='desc'>Price (desc)</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <Products/>
+      <Products category = {category} filters = {filters} sort={sort}/>
       <Newsletter/>
       <Footer/>
     </Container>

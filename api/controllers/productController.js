@@ -61,7 +61,7 @@ exports.getProduct = catchAsync(async (request, response, next) => {
 });
 
 exports.getAllProducts = catchAsync(async (request, response, next) => {
-  const { categories} = request.query;
+  const {categories} = request.query;
   let products = {};
 
   console.log(categories);
