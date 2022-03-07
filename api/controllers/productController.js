@@ -50,12 +50,12 @@ exports.deleteProduct = catchAsync(async (request, response, next) => {
 });
 
 exports.getProduct = catchAsync(async (request, response, next) => {
-  const user = await Product.findById(request.params.id)
+  const product = await Product.findById(request.params.id)
 
   response.status(200).json({
     status: 'success',
     data: {
-      user
+      product
     },
   });
 });
@@ -63,8 +63,6 @@ exports.getProduct = catchAsync(async (request, response, next) => {
 exports.getAllProducts = catchAsync(async (request, response, next) => {
   const {categories} = request.query;
   let products = {};
-
-  console.log(categories);
 
   if(categories){
     products = await Product.find({

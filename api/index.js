@@ -45,4 +45,3 @@ app.listen(process.env.PORT || 5000, () => {
   console.log("Backend Server Running");
 });
 
-console.log("hello");
