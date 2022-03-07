@@ -1,10 +1,16 @@
 import { Add, Remove } from '@material-ui/icons';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
 import { mobile } from '../responsive';
+import { publicRequest, userRequest } from '../requestMethods';
+import { addProduct } from '../redux/cartRedux';
+
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -113,53 +119,90 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const productId = location.pathname.split('/')[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(0);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    try {
+      const getProduct = async () => {
+        const response = await publicRequest.get(`/products/${productId}`);
+        console.log('here', response.data.data);
+        setProduct(response.data.data.product)
+      }
+      getProduct();  
+    } catch (error) {
+      console.log(error);
+    }
+  },[productId])
+
+  useEffect(() => {
+    setQuantity(1);
+  }, [])
+
+  const handleQuantity = (type) => {
+    if(type === 'dec'){
+      setQuantity(quantity > 1 ? quantity - 1 : quantity);
+    }
+    else{
+      setQuantity(quantity + 1)
+    }
+  };
+
+ //console.log({addProduct});
+
+  const handleClick = () => {
+    dispatch(
+      addProduct({
+        ...product,
+        quantity,
+        color,
+        size,
+      })
+    )
+  }
+
+  //console.log('color',product);
+
   return (
     <Container>
       <Navbar/>
       <Announcement/>
         <Wrapper>
           <ImageContainer>
-            <Image src= 'https://i.ibb.co/S6qMxwr/jean.jpg'/>
+            <Image src= {product.img}/>
           </ImageContainer>
           <InfoContainer>
-            <Title>Denim Jumpsuit</Title>
+            <Title>{product.title}</Title>
             <Desc>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-              It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-              It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-              and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            {product.desc}
             </Desc>
             <Price>
-              $ 20
+              $ {product.price}
             </Price>
             <FilterContainer>
                 <Filter>
                   <FilterTitle>Color</FilterTitle>
-                  <FilterColor color='black'/>
-                  <FilterColor color='darkblue'/>
-                  <FilterColor color='gray'/>
+                 {product.color && product.color.map((color) => <FilterColor color={color} key = {color} onClick = {() => {setColor(color)}}/>)}
                 </Filter>
                 <Filter>
                   <FilterTitle>Size</FilterTitle>
-                  <FilterSize>
-                    <FilterSizeOption default disabled>Size</FilterSizeOption>
-                    <FilterSizeOption>XS</FilterSizeOption>
-                    <FilterSizeOption>S</FilterSizeOption>
-                    <FilterSizeOption>M</FilterSizeOption>
-                    <FilterSizeOption>L</FilterSizeOption>
-                    <FilterSizeOption>XL</FilterSizeOption>
+                  <FilterSize onClick = {(event) => {setSize(event.target.value)}}>
+                  {product.size && product.size.map((size) => <FilterSizeOption size={size} key = {size}> {size} </FilterSizeOption>)}
                   </FilterSize>
                 </Filter>
             </FilterContainer>
             <AddContainer>
               <AmountContainer>
-                <Remove/>
-                <Amount>1</Amount>
-                <Add/>
+                <Remove onClick = {() => {handleQuantity('dec')}}/>
+                <Amount>{quantity}</Amount>
+                <Add onClick = {() => {handleQuantity('inc')}}/>
               </AmountContainer>
-              <Button>Add to cart</Button>
+              <Button onClick = {handleClick}>Add to cart</Button>
             </AddContainer>
           </InfoContainer>
         </Wrapper>

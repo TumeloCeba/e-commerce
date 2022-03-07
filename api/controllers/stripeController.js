@@ -7,8 +7,6 @@ dotenv.config({
   debug: true
 });
 
-//console.log(process.env.STRIPE_SECRET_KEY)
-
 const  stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 exports.createCharges = catchAsync(async(request, response, next) => {

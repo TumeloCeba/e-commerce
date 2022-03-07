@@ -11,18 +11,20 @@ import Product from './pages/Product';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+import Success from './pages/Success';
 
 const App = () => {
   const user = true;
   return (
   <Router>
     <Switch>
-    <Route exact path='/' element={<Home/>}/>
-    <Route path='/products/:category' element={<ProductList/>}/>
-    <Route path='/product/:id' element={<Product/>}/>
-    <Route path='/cart' element={<Cart/>}/>
-    <Route path='/login' element={user ? <Redirect to='/'/> : <Login/>}/>
-    <Route path='/register' element={user ? <Redirect to='/'/> :<Register/>}/>
+      <Route exact path='/' element={<Home/>}/>
+      <Route path='/products/:category' element={<ProductList/>}/>
+      <Route path='/product/:id' element={<Product/>}/>
+      <Route path='/cart' element={<Cart/>}/>
+      <Route path='/success' element={<Success/>}/>
+      <Route path='/login' element={user ? <Redirect to='/'/> : <Login/>}/>
+      <Route path='/register' element={user ? <Redirect to='/'/> :<Register/>}/>
     </Switch>
 
   </Router>);

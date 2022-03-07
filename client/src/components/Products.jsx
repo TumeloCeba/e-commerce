@@ -19,7 +19,7 @@ const Products = ({ category, filters, sort }) => {
    const getProducts = async () => {
       try {
         const response = await axios.get(category ? `http://localhost:5000/api/products?categories=${category}` : 'http://localhost:5000/api/products');
-        console.log(response.data.data);
+     //   console.log(response.data.data);
         setProducts(response.data.data.products);
       } catch (error) {
         console.log(error);
@@ -37,13 +37,24 @@ const Products = ({ category, filters, sort }) => {
    }, 
    [products, category, filters]);
 
-   useEffect()
+   useEffect(() => {
+     if(sort==='newest'){
+       setFilteredProducts(prev => [...prev].sort((a,b) => a.createdAt - b.createdAt))
+     } else if(sort==='asc'){
+      setFilteredProducts(prev => [...prev].sort((a,b) => a.price - b.price))
+     } else {
+      setFilteredProducts(prev => [...prev].sort((a,b) => b.price - a.price))
+    }
+   },[sort]);
 
-   console.log('filteredproducts',filteredproducts);
+//   console.log('filteredproducts',filteredproducts);
 
   return (
     <Container>
-      {filteredproducts.map((product) => (<Product product={product} key={product.id}></Product>))}
+      {category 
+         ? filteredproducts.map((product) => (<Product product={product} key={product.id}></Product>))
+         : products.slice(0,8).map((product) => (<Product product={product} key={product.id}></Product>))
+        }
     </Container>
   );
 };
