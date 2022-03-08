@@ -11,7 +11,6 @@ import {
   REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import cartReducer from './cartRedux';
 import userReducer from './userRedux';
 //import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -21,9 +20,9 @@ const persistConfig = {
   storage,
 };
 
-const rootRedurer = combineReducers({ user:userReducer, cart:cartReducer});
+const rootReducer = combineReducers({ user:userReducer })
 
-const persistedReducer = persistReducer(persistConfig, rootRedurer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

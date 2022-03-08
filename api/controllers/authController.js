@@ -144,6 +144,8 @@ exports.login = catchAsync(async (request, response, next) => {
   let credentialsValid = false;
   let user;
 
+  console.log({email,password});
+
   if(email && password){
     user = await User.findOne({
       email,
@@ -169,7 +171,7 @@ exports.login = catchAsync(async (request, response, next) => {
         httpOnly: true,
        // secure: true,
       });
-
+      //console.log('login', data);
     response
       .status(200)
       .json({
