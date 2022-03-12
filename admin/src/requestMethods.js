@@ -11,13 +11,14 @@ function getCookie(cookieName) {
   return cookie[cookieName];
 }
 
-const TOKEN = getCookie('jwt'); //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWE1ZjE3MDU5YTEwOTJlMWIxMDhmYyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0NjQzMTU3NCwiZXhwIjoxNjQ2NjkwNzc0fQ.nleFLP4dZ_SkmQb2IEUn7L6lrsdFyto_UoqVVNYG1xE'
-
+const TOKEN = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.jwt;
+  //getCookie('jwt'); //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWE1ZjE3MDU5YTEwOTJlMWIxMDhmYyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0NjQzMTU3NCwiZXhwIjoxNjQ2NjkwNzc0fQ.nleFLP4dZ_SkmQb2IEUn7L6lrsdFyto_UoqVVNYG1xE'
+console.log('token',TOKEN);
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
 });
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
-  header: {token: `Bearer ${TOKEN}`}
+  headers: {'Authorization': `Bearer ${TOKEN}`}
 });

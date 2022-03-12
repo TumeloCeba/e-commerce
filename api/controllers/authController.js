@@ -21,6 +21,8 @@ exports.protect = catchAsync(async (request, response, next) => {
   //Getting token and check if its there
   let token;
 
+  console.log('protect', request.headers);
+
   if (
     request.headers.authorization &&
     request.headers.authorization.startsWith('Bearer')
@@ -168,16 +170,18 @@ exports.login = catchAsync(async (request, response, next) => {
       'jwt', 
       accessToken,
       {
-        httpOnly: true,
+        //httpOnly: true,
        // secure: true,
       });
-      //console.log('login', data);
+    //console.log('login here', modifiedUser);
+
     response
       .status(200)
       .json({
         status: 'success',
         data: {
-          user:modifiedUser
+          user: modifiedUser,
+          jwt: accessToken
         },
       },
     );
