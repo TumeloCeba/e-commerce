@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
     type:String,
     enum: ['active', 'deleted'],
     default: 'active'
+  },
+  img: {
+    type: String
   }
 },
 {

@@ -21,7 +21,7 @@ exports.protect = catchAsync(async (request, response, next) => {
   //Getting token and check if its there
   let token;
 
-  console.log('protect', request.headers);
+  //console.log('protect', request.headers);
 
   if (
     request.headers.authorization &&

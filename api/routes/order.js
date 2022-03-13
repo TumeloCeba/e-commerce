@@ -39,4 +39,13 @@ router
     authController.restrictTo('admin'),
     orderController.updateOrder);
 
+router
+  .route('/income')
+  .get(
+    authController.protect,
+    authController.restrictTo('admin'),
+    orderController.getIncome,
+  )
+  
+
 module.exports = router;

@@ -80,7 +80,7 @@ exports.getUserOrders = catchAsync(async (request, response, next) => {
 });
 
 exports.getAllOrders = catchAsync(async (request, response, next) => {
-  const orders = await Order.find();
+  const orders = await Order.find().populate('user');
   
   response.status(200).json({
     status: 'success',
@@ -88,5 +88,34 @@ exports.getAllOrders = catchAsync(async (request, response, next) => {
     data: {
       orders
     },
+  });
+});
+
+exports.getIncome = catchAsync( async (req, res) => {
+  const date = new Date();
+  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+
+  const income = await Order.aggregate([
+    { $match: { createdAt: { $gte: previousMonth } } },
+    {
+      $project: {
+        month: { $month: "$createdAt" },
+        sales: "$amount",
+      },
+    },
+    {
+      $group: {
+        _id: "$month",
+        total: { $sum: "$sales" },
+      },
+    },
+  ]);
+
+  res.status(200).json({
+    status: 'success',
+    data:{
+      income,
+    }
   });
 });

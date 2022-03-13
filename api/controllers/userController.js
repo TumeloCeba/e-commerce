@@ -4,7 +4,7 @@ const User = require("../models/UserModel")
 //exports.updateMe = catchAsync((request, response, next) => {})
 exports.updateMe = catchAsync(async (request, response, next) => {
   const userId = request.user._id.toString();
-  console.log(userId);
+  //console.log(userId);
   const updatedUser = await User.findByIdAndUpdate(
     request.user._id, 
     { 
@@ -56,7 +56,7 @@ exports.getAllUsers = catchAsync(async (request, response, next) => {
     });
   }
 
-  const users = await User.find()
+  const users = await User.find();
 
   response.status(200).json({
     status: 'success',
