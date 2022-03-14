@@ -40,7 +40,7 @@ router
     orderController.updateOrder);
 
 router
-  .route('/income')
+  .route('/income/:pid?')
   .get(
     authController.protect,
     authController.restrictTo('admin'),

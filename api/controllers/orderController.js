@@ -91,13 +91,18 @@ exports.getAllOrders = catchAsync(async (request, response, next) => {
   });
 });
 
-exports.getIncome = catchAsync( async (req, res) => {
+exports.getIncome = catchAsync( async (request, response) => {
+  const productId = request.query.pid;
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
-
   const income = await Order.aggregate([
-    { $match: { createdAt: { $gte: previousMonth } } },
+    { 
+      $match: {
+         createdAt: { $gte: previousMonth }, 
+        ...(productId && { products: {$elemMatch: {_id: productId}}}) 
+      } 
+    },
     {
       $project: {
         month: { $month: "$createdAt" },
@@ -112,7 +117,7 @@ exports.getIncome = catchAsync( async (req, res) => {
     },
   ]);
 
-  res.status(200).json({
+  response.status(200).json({
     status: 'success',
     data:{
       income,

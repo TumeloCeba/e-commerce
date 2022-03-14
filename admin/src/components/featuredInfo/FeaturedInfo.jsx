@@ -24,9 +24,6 @@ export default function FeaturedInfo() {
     getIncome();
   },[])
 
-  console.log('income1', income);
-  console.log('percentage1', percentage);
-
   return (
     <div className='featured'>
       <div className='featuredItem'>

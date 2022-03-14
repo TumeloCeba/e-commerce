@@ -10,7 +10,6 @@ export default function WidgetSm() {
     const getUsers = async () => {
       try{
         const response = await userRequest.get('/users/?true');
-        console.log('users',response.data.data.users);
         setUsers(response.data.data.users);
       } catch(error){
 

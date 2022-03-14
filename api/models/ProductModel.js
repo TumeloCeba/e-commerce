@@ -38,6 +38,10 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  stock: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     immutable: true // Make `createdAt` immutable
