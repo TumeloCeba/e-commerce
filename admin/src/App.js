@@ -12,11 +12,16 @@ import NewProduct from './pages/newProduct/NewProduct';
 import Login from './pages/login/Login';
 
 function App() {
-  const admin = JSON.parse(
+  let admin;
+  try{
+    admin = JSON.parse(
     JSON.parse(localStorage.getItem('persist:root')).user
     ).currentUser.role.includes('admin');
- 
-  console.log(admin);
+  } catch(error){
+    console.log(error);
+  }
+
+  //console.log(admin);
   return (
     <Router>
       <Switch>

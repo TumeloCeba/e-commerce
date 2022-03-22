@@ -22,7 +22,7 @@ const productSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
-     //GET ALL
+     //DELETE
      deleteProductsStart: (state) => {
       state.isFetching = true;
       state.error = false;
@@ -36,9 +36,48 @@ const productSlice = createSlice({
     deleteProductFailure: (state) => {
       state.isFetching = false;
       state.error = true;
-    }
+    },
+    //UPDATE
+    updateProductsStart: (state) => {
+     state.isFetching = true;
+     state.error = false;
+    },
+    updateProductSuccess: (state, action) => {
+      state.isFetching = false;
+      state.products[state.products.findIndex((item) => item._id = action.payload.id )] = action.payload.product;
+    },
+    updateProductFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+    //UPDATE
+    addProductsStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+     },
+     addProductSuccess: (state, action) => {
+       state.isFetching = false;
+       state.products.push(action.payload);
+     },
+     addProductFailure: (state) => {
+       state.isFetching = false;
+       state.error = true;
+     }
   }
 })
 
-export const {getProductsStart, getProductSuccess, getProductFailure,deleteProductsStart, deleteProductSuccess, deleteProductFailure } = productSlice.actions;
+export const {
+  getProductsStart, 
+  getProductSuccess,
+  getProductFailure,
+  deleteProductsStart,
+  deleteProductSuccess,
+  deleteProductFailure,
+  updateProductsStart,
+  updateProductSuccess,
+  updateProductFailure, 
+  addProductsStart,
+  addProductSuccess,
+  addProductFailure 
+} = productSlice.actions;
 export default productSlice.reducer;

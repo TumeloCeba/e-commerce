@@ -3,12 +3,12 @@ const Product = require("../models/ProductModel");
 
 //exports.updateMe = catchAsync((request, response, next) => {})
 exports.createProduct = catchAsync(async (request, response, next) => {
-  const newProduct = await Product.create(request.body);
+  const product = await Product.create(request.body);
 
   response.status(200).json({
     status: "success",
     data: {
-      newProduct,
+      product,
     },
   });
 });
@@ -68,7 +68,7 @@ exports.getAllProducts = catchAsync(async (request, response, next) => {
     products = await Product.find();
   }
 
-  console.log('api products', products);
+  //console.log('api products', products);
 
   response.status(200).json({
     status: "success",

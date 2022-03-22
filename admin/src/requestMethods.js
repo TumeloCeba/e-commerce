@@ -13,8 +13,13 @@ const BASE_URL = process.env.REACT_APP_API_DEV_BASE_URL;
   return cookie[cookieName];
 }*/ 
 
-const TOKEN = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.jwt;
+let TOKEN;
 
+try{
+  TOKEN = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.jwt;
+} catch(error){
+  console.log(error);
+}
 //console.log('token',TOKEN);
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
