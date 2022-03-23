@@ -15,6 +15,8 @@ exports.createProduct = catchAsync(async (request, response, next) => {
 
 exports.updateProduct = catchAsync(async (request, response, next) => {
   const { status, updatedAt, ...updateProductBody } = request.body;
+
+  console.log(request.body);
   const updatedProduct = await Product.findByIdAndUpdate(
     request.params.id,
     updateProductBody,

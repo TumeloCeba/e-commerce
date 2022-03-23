@@ -7,6 +7,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  fullName: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -25,6 +31,11 @@ const userSchema = new mongoose.Schema({
     type:String,
     enum: ['active', 'deleted'],
     default: 'active'
+  },
+  status: {
+    type:String,
+    enum: ['male', 'female', 'other'],
+    default: 'other'
   },
   img: {
     type: String

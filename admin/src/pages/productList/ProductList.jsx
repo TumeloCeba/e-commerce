@@ -14,6 +14,7 @@ export default function ProductList() {
     getProducts(dispatch);
   }, [dispatch]);
   
+
   const handleDelete = (id) => {
     deleteProduct(id, dispatch);
   };

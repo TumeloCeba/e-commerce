@@ -52,7 +52,7 @@ export const updateProduct = async (id, product, dispatch) => {
   dispatch(updateProductsStart());
 
   try{
-     //await userRequest.patch(`/products/${id}`);
+     await userRequest.patch(`/products/${id}`, product);
     dispatch(updateProductSuccess({id, product}));
   } catch(error){
     dispatch(updateProductFailure());

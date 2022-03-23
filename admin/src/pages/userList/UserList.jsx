@@ -3,26 +3,41 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../requestMethods";
 
 export default function UserList() {
   const [data, setData] = useState(userRows);
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try{
+        const response = await userRequest.get('/users');
+        setUsers(response.data.data.users);
+      }catch(error){
+        console.log(error);
+      }
+    }
+    getUsers();
+  },
+  []);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
   
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 90 },
     {
-      field: "user",
-      headerName: "User",
+      field: "userName",
+      headerName: "User Name",
       width: 200,
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.username}
+            <img className="userListImg" src={params.row.img} alt="" />
+            {params.row.userName}
           </div>
         );
       },
@@ -33,11 +48,11 @@ export default function UserList() {
       headerName: "Status",
       width: 120,
     },
-    {
-      field: "transaction",
+    /*{
+      field: "status",
       headerName: "Transaction Volume",
       width: 160,
-    },
+    },*/
     {
       field: "action",
       headerName: "Action",
@@ -45,12 +60,12 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
+            <Link to={"/user/" + params.row._id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -58,11 +73,14 @@ export default function UserList() {
     },
   ];
 
+  console.log('users ', users);
+
   return (
-    <div className="userList">
+    users && <div className="userList">
       <DataGrid
-        rows={data}
+        rows={users}
         disableSelectionOnClick
+        getRowId={row => row._id}
         columns={columns}
         pageSize={8}
         checkboxSelection

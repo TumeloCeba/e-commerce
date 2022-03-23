@@ -64,8 +64,6 @@ export default function NewProduct() {
         const product = {...inputs, img: downloadURL, categories: cat};
         addProduct(product, dispatch);
        });
-
-      
     }
   );
 };

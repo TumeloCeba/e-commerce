@@ -50,7 +50,7 @@ const productSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
-    //UPDATE
+    //ADD
     addProductsStart: (state) => {
       state.isFetching = true;
       state.error = false;
