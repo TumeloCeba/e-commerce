@@ -5,6 +5,22 @@ import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { styled } from "@material-ui/core";
+
+const Button = styled.button`
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+`;
+
+const ButtonContainer = styled.div`
+
+`;
 
 export default function UserList() {
   const [data, setData] = useState(userRows);
@@ -76,6 +92,7 @@ export default function UserList() {
   console.log('users ', users);
 
   return (
+    
     users && <div className="userList">
       <DataGrid
         rows={users}
@@ -85,6 +102,14 @@ export default function UserList() {
         pageSize={8}
         checkboxSelection
       />
+      <ButtonContainer>
+        <Link to='/newUser'>
+          <Button >Create</Button>
+        </Link>
+      </ButtonContainer>
+      
     </div>
+
+    
   );
 }

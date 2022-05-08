@@ -131,7 +131,6 @@ const Product = () => {
     try {
       const getProduct = async () => {
         const response = await publicRequest.get(`/products/${productId}`);
-        console.log('here', response.data.data);
         setProduct(response.data.data.product)
       }
       getProduct();  
@@ -153,8 +152,6 @@ const Product = () => {
     }
   };
 
- //console.log({addProduct});
-
   const handleClick = () => {
     dispatch(
       addProduct({
@@ -165,8 +162,6 @@ const Product = () => {
       })
     )
   }
-
-  //console.log('color',product);
 
   return (
     <Container>

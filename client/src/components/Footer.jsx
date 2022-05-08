@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Facebook, Instagram, Twitter, Pinterest, Room, Phone, MailOutline } from "@mui/icons-material";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   ${mobile({flexDirection: "column"})}
@@ -69,6 +70,11 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  cursor: pointer;
+  &:hover{
+    color: green;
+    cursor: not-allowed;
+  };
 `;
 
 const Footer = () => {
@@ -100,14 +106,33 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-        <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
+          <ListItem>
+            <Link to = '/'>
+              Home
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link to = '/cart'>
+              Cart
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link to = '/products/men'>
+              Man Fashion
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link to = '/products/women'>
+              Woman Fashion
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link to = '/products/accessories'>
+            Accessories
+            </Link>
+          </ListItem>
           <ListItem>My Account</ListItem>
           <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
           <ListItem>Wishlist</ListItem>
           <ListItem>Terms</ListItem>
         </List>
@@ -118,10 +143,10 @@ const Footer = () => {
           <Room style={{marginRight: '10px'}}/> 622 Dixie Path, South Tobinchester 98336
         </ContactItem>
         <ContactItem>
-        <Phone style={{marginRight: '10px'}}/> +1 234 56 78
+        <Phone style={{marginRight: '10px'}}/> 012 345 6789
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{marginRight: '10px'}} /> contact@lama.dev
+          <MailOutline style={{marginRight: '10px'}} /> tumeloceba@icloud.com
         </ContactItem>
         <Payment src='https://i.ibb.co/Qfvn4z6/payment.png' />
       </Right>

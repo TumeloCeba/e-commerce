@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {Badge} from '@mui/material';
 import { Link } from "react-router-dom";
 import {ShoppingCartOutlined, Search} from '@mui/icons-material';
 import {mobile} from '../responsive';
+import { logout } from "../redux/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -71,7 +73,18 @@ const SearchContainer = styled.div`
 `;
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const nagivate = useNavigate();
+
   const quantity = useSelector(state => state.cart.quantity);
+  const currentUser = useSelector(state => state.user.currentUser);
+
+  const handleLogout = (event) =>{
+    event.preventDefault();
+    logout(dispatch);
+    nagivate('/');
+  }
+
   return (
     <Container>
       <Wrapper>
@@ -88,8 +101,25 @@ const Navbar = () => {
           </Logo>
         </Center>
         <Right>
-          <MenuItem> REGISTER </MenuItem>
-          <MenuItem> SIGN IN</MenuItem>
+        <Link to='/'>
+          <MenuItem> HOME </MenuItem>
+        </Link>
+        {(currentUser) ?
+          <MenuItem onClick={handleLogout}> 
+            <Link to = '/'>
+              SIGN OUT
+            </Link>
+          </MenuItem>
+          :
+          <>
+            <Link to='/register'>
+              <MenuItem> REGISTER </MenuItem>
+            </Link>
+            <Link to='/login'>
+              <MenuItem> SIGN IN</MenuItem>
+            </Link>
+          </>
+      }
           <Link to='/cart'>
             <MenuItem> 
             <Badge badgeContent={quantity} color='primary'>

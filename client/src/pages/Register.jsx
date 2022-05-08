@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { signUp } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 
 const Container = styled.div`
@@ -32,6 +36,8 @@ const Input = styled.input`
   min-width: 40%;
   margin: 20px 10px 0px 0px;
   padding: 10px;
+  font-size: 17px;
+
 `;
 
 const Agreement = styled.span`
@@ -49,22 +55,42 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [userDetails, setUserDetails] = useState({});
+  const handleDetailChange = (event) => {
+    setUserDetails((prev) => {
+      return {
+        ...prev, 
+        [event.target.name]: event.target.value
+      }
+    })
+  };
+
+  console.log(userDetails);
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    signUp(dispatch,userDetails);
+    navigate('/');
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder='name'/>
-          <Input placeholder='last name'/>
-          <Input placeholder='username'/>
-          <Input placeholder='email'/>
-          <Input placeholder='password'/>
-          <Input placeholder='conform password'/>
+          <Input onChange = {handleDetailChange} name = 'firstName' placeholder='Name'/>
+          <Input onChange = {handleDetailChange} name = 'lastName' placeholder='Last Name'/>
+          <Input onChange = {handleDetailChange} name = 'userName' placeholder='Username'/>
+          <Input onChange = {handleDetailChange} name = 'email' placeholder='Email'/>
+          <Input onChange = {handleDetailChange} name = 'password' type='Password' placeholder='Password'/>
+          <Input onChange = {handleDetailChange} name = 'passwordConfirm' type='Password' placeholder='Confirm password'/>
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleRegister}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

@@ -21,8 +21,6 @@ exports.protect = catchAsync(async (request, response, next) => {
   //Getting token and check if its there
   let token;
 
-  //console.log('protect', request.headers);
-
   if (
     request.headers.authorization &&
     request.headers.authorization.startsWith('Bearer')
@@ -56,18 +54,7 @@ exports.protect = catchAsync(async (request, response, next) => {
     );
   }
 
-  /*
-  //check if user changed password after jwt token was issued
-  if (currentUser.changedPasswordAfter(decoded.iat)) {
-    return next(
-      new AppError('User recently changed password! Please log in again', 401)
-    );
-  }
-  */
-
   request.user = currentUser;
- // response.locals.user = currentUser;
-  //GRANT ACCESS TO PROTECTED ROUTE
   next();
 });
 
@@ -118,10 +105,14 @@ exports.verifyToken = catchAsync(async (request, response, next) => {
 });
 
 exports.signUp =  catchAsync(async (request, response, next) => {
+
   const newUser = await User.create({
+    firstName: request.body.firstName,
+    lastName: request.body.lastName,
     userName: request.body.userName,
     email: request.body.email,
     password: request.body.password,
+    passwordConfirm: request.body.passwordConfirm,
   });
 
   const accessToken = await createToken(newUser);

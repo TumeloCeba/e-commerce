@@ -30,9 +30,6 @@ export default function User() {
   },
   [userId]);
 
-  //console.log('user', user);
-  console.log('inputs', inputs);
-
   const handleChange = (event) => {
     setInputs((prev) => {
       return {
@@ -101,9 +98,6 @@ export default function User() {
     <div className='user'>
       <div className='userTitleContainer'>
         <h1 className='userTitle'>Edit User</h1>
-        <Link to='/newUser'>
-          <button className='userAddButton'>Create</button>
-        </Link>
       </div>
       <div className='userContainer'>
         <div className='userShow'>

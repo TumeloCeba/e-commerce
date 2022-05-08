@@ -8,7 +8,7 @@ import { mobile } from '../responsive';
 import StripeCheckout from 'react-stripe-checkout';
 import { useEffect, useState } from 'react';
 import { userRequest } from '../requestMethods';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const KEY = process.env.REACT_APP_STRIPE_KEY;
 
@@ -161,12 +161,12 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state => state.cart));
+  const history = useNavigate();
   const [stripeToken, setStripeToken] = useState(null);
+  document.title = 'Cart';
   const onToken = (token) => {
     setStripeToken(token);
   };
-  const history = useNavigate();
-  
   
   useEffect(()=>{
     const makeRequest = async () => {
@@ -196,9 +196,12 @@ const Cart = () => {
         <Wrapper>
             <Title> YOUR BAG </Title>
             <Top> 
-              <TopButton>CONTINUE SHOPPING</TopButton>
+              <TopButton>
+                <Link to = '/'>
+                  CONTINUE SHOPPING
+                </Link>
+              </TopButton>
               <TopTexts>
-                <TopText>Shopping Bag(4)</TopText>
                 <TopText>Your Wishlist</TopText>
               </TopTexts>
               <TopButton type= 'filled'>CHECKOUT NOW</TopButton>
@@ -223,7 +226,7 @@ const Cart = () => {
                           <ProductAmount> {product.quantity}</ProductAmount>
                         <Remove/>
                       </ProductAmountContainer>
-                      <ProductPrice>$  {product.price*product.quantity} </ProductPrice>
+                      <ProductPrice>R  {product.price*product.quantity} </ProductPrice>
                     </PriceDetail>
                   </Product>
                   ))
@@ -234,19 +237,19 @@ const Cart = () => {
                 <SummaryTitle>ORDER SUMMARY</SummaryTitle> 
                 <SummaryItem>
                   <SummaryItemText>Subtotal</SummaryItemText>
-                  <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                  <SummaryItemPrice>R {cart.total}</SummaryItemPrice>
                 </SummaryItem> 
                 <SummaryItem>
                   <SummaryItemText>Estimated Shipping</SummaryItemText>
-                  <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                  <SummaryItemPrice>R 5.90</SummaryItemPrice>
                 </SummaryItem> 
                 <SummaryItem>
                   <SummaryItemText>Shipping discount</SummaryItemText>
-                  <SummaryItemPrice>-$ 5.90</SummaryItemPrice>
+                  <SummaryItemPrice>-R 5.90</SummaryItemPrice>
                 </SummaryItem> 
                 <SummaryItem type='total'>
                   <SummaryItemText>Total</SummaryItemText>
-                  <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                  <SummaryItemPrice>R {cart.total}</SummaryItemPrice>
                 </SummaryItem> 
                 <StripeCheckout
                   name = 'The spice zone'

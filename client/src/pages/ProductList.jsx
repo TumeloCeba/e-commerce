@@ -43,7 +43,8 @@ const ProductList = () => {
   const category = location.pathname.split('/')[2];
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState('newest');
-
+  const title = `${category.charAt(0).toUpperCase()}${category.substring(1)}`;
+  document.title = title;
 
   const handleFilters = (event) => {
     const value = event.target.value;
@@ -64,7 +65,7 @@ const ProductList = () => {
     <Container>
       <Navbar/>
       <Announcement/>
-      <Title>{`${category}s`}</Title>
+      <Title>{title}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
@@ -76,6 +77,7 @@ const ProductList = () => {
             <Option>blue</Option>
             <Option>yellow</Option>
             <Option>green</Option>
+            <Option>gray</Option>
           </Select>
           <Select name= 'size' onChange={handleFilters}>
             <Option disabled>Size</Option>
