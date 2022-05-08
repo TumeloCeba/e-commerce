@@ -110,7 +110,7 @@ const Navbar = () => {
               SIGN OUT
             </Link>
           </MenuItem>
-          :
+          : 
           <>
             <Link to='/register'>
               <MenuItem> REGISTER </MenuItem>

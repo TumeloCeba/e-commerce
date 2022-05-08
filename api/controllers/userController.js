@@ -16,7 +16,7 @@ exports.updateMe = catchAsync(async (request, response, next) => {
       runValidators: true 
     },
   )
-
+ 
   response
     .status(200)
     .json({

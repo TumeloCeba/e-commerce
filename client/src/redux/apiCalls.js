@@ -27,7 +27,7 @@ export const logout = async (dispatch) => {
     dispatch(loginFailure());
   }
 };
-
+ 
 export const signUp = async (dispatch, user) => {
 
   try {

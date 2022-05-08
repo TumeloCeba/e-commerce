@@ -60,7 +60,7 @@ const ProductList = () => {
 
     setSort(value);
   }
-
+  
   return (
     <Container>
       <Navbar/>

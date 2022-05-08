@@ -64,7 +64,7 @@ const Icon = styled.div`
     transform: scale(1.1); 
   }
 `;
-
+ 
 const Product = ({ product }) => {
   return (
     <Container>

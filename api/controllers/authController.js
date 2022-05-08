@@ -105,7 +105,7 @@ exports.verifyToken = catchAsync(async (request, response, next) => {
 });
 
 exports.signUp =  catchAsync(async (request, response, next) => {
-
+ 
   const newUser = await User.create({
     firstName: request.body.firstName,
     lastName: request.body.lastName,
