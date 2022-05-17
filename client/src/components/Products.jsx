@@ -4,6 +4,8 @@ import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_API_BASE_URL; 
+
 const Container = styled.div`
   padding: 20px;
   display: flex;
@@ -17,7 +19,7 @@ const Products = ({ category, filters, sort }) => {
   useEffect(() => {
    const getProducts = async () => {
       try {
-        const response = await axios.get(category ? `http://localhost:5000/api/products?categories=${category}` : 'http://localhost:5000/api/products');
+        const response = await axios.get(category ? `${BASE_URL}products?categories=${category}` : `${BASE_URL}products`);
         setProducts(response.data.data.products);
       } catch (error) {
         console.log(error);
