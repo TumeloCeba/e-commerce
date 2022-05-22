@@ -102,7 +102,7 @@ const Slider = () => {
               <Desc>
                 {item.desc}
               </Desc>
-              <Button>SHOW NOW</Button>
+              <Button className = 'selected'>SHOW NOW</Button>
             </InfoContainer>
           </Slide>
         ))}

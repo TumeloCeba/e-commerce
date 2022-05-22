@@ -67,8 +67,6 @@ const Register = () => {
     })
   };
 
-  console.log(userDetails);
-
   const handleRegister = (event) => {
     event.preventDefault();
     signUp(dispatch,userDetails);

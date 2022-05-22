@@ -97,15 +97,15 @@ const Navbar = () => {
         </Left>
         <Center>
           <Logo>
-            SPICE ZONE
+            THE ZONE
           </Logo>
         </Center>
         <Right>
         <Link to='/'>
-          <MenuItem> HOME </MenuItem>
+          <MenuItem className = 'selected'> HOME </MenuItem>
         </Link>
         {(currentUser) ?
-          <MenuItem onClick={handleLogout}> 
+          <MenuItem className = 'selected' onClick={handleLogout}> 
             <Link to = '/'>
               SIGN OUT
             </Link>
@@ -113,15 +113,15 @@ const Navbar = () => {
           : 
           <>
             <Link to='/register'>
-              <MenuItem> REGISTER </MenuItem>
+              <MenuItem className = 'selected' > REGISTER </MenuItem>
             </Link>
             <Link to='/login'>
-              <MenuItem> SIGN IN</MenuItem>
+              <MenuItem className = 'selected'> SIGN IN</MenuItem>
             </Link>
           </>
       }
           <Link to='/cart'>
-            <MenuItem> 
+            <MenuItem className = 'selected'> 
             <Badge badgeContent={quantity} color='primary'>
               <ShoppingCartOutlined/>
             </Badge>

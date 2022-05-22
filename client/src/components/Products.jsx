@@ -50,8 +50,8 @@ const Products = ({ category, filters, sort }) => {
   return (
     <Container>
       {category 
-         ? filteredproducts.map((product) => (<Product product={product} key={product.id}></Product>))
-         : products.slice(0,8).map((product) => (<Product product={product} key={product.id}></Product>))
+         ? filteredproducts.map((product) => (<Product product={product} key={product._id}></Product>))
+         : products.slice(0,8).map((product) => (<Product product={product} key={product._id}></Product>))
         }
     </Container>
   );

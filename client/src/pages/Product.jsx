@@ -6,11 +6,11 @@ import { useDispatch } from 'react-redux';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import Error from '../components/Error';
 import Newsletter from '../components/Newsletter';
 import { mobile } from '../responsive';
 import { publicRequest, userRequest } from '../requestMethods';
 import { addProduct } from '../redux/cartRedux';
-
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -25,13 +25,13 @@ const Image = styled.img`
   width: 100%;
   height: 90vh;
   object-fit: cover;
-  ${mobile({height: "40vh"})}
+  ${mobile({height: '40vh'})}
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px; 
-  ${mobile({width: "0px 10px"})}
+  ${mobile({width: '0px 10px'})}
 `;
 
 const Title = styled.h1`
@@ -52,7 +52,7 @@ const FilterContainer = styled.div`
   margin 30px 0px;
   display: flex;
   justify-content: space-between;
-  ${mobile({width: "100%"})}
+  ${mobile({width: '100%'})}
 `;
 
 const Filter = styled.div`
@@ -86,7 +86,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({width: "100%"})}
+  ${mobile({width: '100%'})}
 `;
 
 const AmountContainer = styled.div`
@@ -113,18 +113,16 @@ const Button = styled.button`
   background-color: white;
   cursor: pointer;
   font-weight: 500;
-  &: hover{
-    background-color: #f8f4f4;
-  }
 `;
 
 const Product = () => {
+  document.title = 'Product';
   const location = useLocation();
   const productId = location.pathname.split('/')[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(0);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
   const dispatch = useDispatch();
  
   useEffect(() => {
@@ -153,6 +151,7 @@ const Product = () => {
   };
 
   const handleClick = () => {
+
     dispatch(
       addProduct({
         ...product,
@@ -161,6 +160,7 @@ const Product = () => {
         size,
       })
     )
+
   }
 
   return (
@@ -182,22 +182,22 @@ const Product = () => {
             <FilterContainer>
                 <Filter>
                   <FilterTitle>Color</FilterTitle>
-                 {product.color && product.color.map((color) => <FilterColor color={color} key = {color} onClick = {() => {setColor(color)}}/>)}
+                 {product.color && product.color.map((color) => <FilterColor className = 'selected' color={color} key = {color} onClick = {() => {setColor(color)}}/>)}
                 </Filter>
                 <Filter>
-                  <FilterTitle>Size</FilterTitle>
-                  <FilterSize onClick = {(event) => {setSize(event.target.value)}}>
+                  <FilterTitle >Size</FilterTitle>
+                  <FilterSize className = 'selected' onClick = {(event) => {setSize(event.target.value)}}>
                   {product.size && product.size.map((size) => <FilterSizeOption size={size} key = {size}> {size} </FilterSizeOption>)}
                   </FilterSize>
                 </Filter>
             </FilterContainer>
             <AddContainer>
               <AmountContainer>
-                <Remove onClick = {() => {handleQuantity('dec')}}/>
+                <Remove className = 'selected' onClick = {() => {handleQuantity('dec')}}/>
                 <Amount>{quantity}</Amount>
-                <Add onClick = {() => {handleQuantity('inc')}}/>
+                <Add className = 'selected' onClick = {() => {handleQuantity('inc')}}/>
               </AmountContainer>
-              <Button onClick = {handleClick}>Add to cart</Button>
+              <Button className = 'selected' onClick = {handleClick}>Add to cart</Button>
             </AddContainer>
           </InfoContainer>
         </Wrapper>

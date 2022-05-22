@@ -1,0 +1,30 @@
+.selected:hover {
+    opacity: 0.8;
+    background-color: rgb(71, 131, 131);
+};
+
+.removeButton:hover {
+    cursor: pointer;
+}
+
+.fadeInOut {
+    animation-name: fadeOnOff;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: linear;
+    animation-duration: 100ms;
+    animation-delay: 1.7s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeOnOff {
+  0% {
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

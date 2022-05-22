@@ -45,12 +45,10 @@ const CategoryItem = ({item}) => {
   return (
     <Container>
       <Link to={`products/${item.cat}`}>
-        <Image src={item.img}>
-
-        </Image>
+        <Image src={item.img}/>
         <Info>
           <Title>{item.title}</Title>
-          <Button>SHOW -NOW</Button>
+          <Button className = 'selected'>SHOW -NOW</Button>
         </Info>
       </Link>
     </Container>)

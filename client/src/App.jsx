@@ -13,6 +13,8 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import Success from './pages/Success';
 import { useSelector } from 'react-redux';
+import './css/styles.css';
+
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
