@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { signUp } from "../redux/apiCalls";
-import { mobile } from "../responsive";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { signUp } from '../redux/apiCalls';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background:linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)), url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
+  background:linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)), url('https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') center;
   background-size: cover;
 `;
  
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   width: 40%;
   background-color: white;
   padding: 20px;
-  ${mobile({display: "75%"})}
+  ${mobile({display: '75%'})}
 `;
 
 const Title = styled.h1`

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const findIndex = (array, element, property) => {
   let index;
@@ -17,7 +17,7 @@ const returnPositive = (number) => {
 }
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState: {
     products: [],
     quantity: 0,
@@ -35,7 +35,7 @@ const cartSlice = createSlice({
     },
     removeProduct: (oldState, action) => {
       const state = {...oldState};
-      const productIndex = findIndex(state.products, action.payload._id, "_id");
+      const productIndex = findIndex(state.products, action.payload._id, '_id');
       const currentProduct = state.products[productIndex];
 
       if(currentProduct){

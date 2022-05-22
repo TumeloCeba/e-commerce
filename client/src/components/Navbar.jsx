@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {Badge} from '@mui/material';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {ShoppingCartOutlined, Search} from '@mui/icons-material';
 import {mobile} from '../responsive';
-import { logout } from "../redux/apiCalls";
-import { useNavigate } from "react-router-dom";
+import { logout } from '../redux/apiCalls';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   height: 60px;

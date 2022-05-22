@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   ShoppingCartOutlined,
   SearchOutlined,
   FavoriteBorderOutlined,
-} from "@mui/icons-material";
-import { Link } from "react-router-dom";
+} from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const Info = styled.div`
   opacity: 0;

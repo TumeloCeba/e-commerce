@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { popularProducts } from "../data";
-import Product from "./Product";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { popularProducts } from '../data';
+import Product from './Product';
+import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL; 
 

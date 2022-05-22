@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { Facebook, Instagram, Twitter, Pinterest, Room, Phone, MailOutline } from "@mui/icons-material";
-import { mobile } from "../responsive";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Facebook, Instagram, Twitter, Pinterest, Room, Phone, MailOutline } from '@mui/icons-material';
+import { mobile } from '../responsive';
+import { Link } from 'react-router-dom';
 const Container = styled.div`
   display: flex;
-  ${mobile({flexDirection: "column"})}
+  ${mobile({flexDirection: 'column'})}
 `;
 const Left = styled.div`
   flex: 1;
@@ -39,7 +39,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
-  ${mobile({display: "none"})}
+  ${mobile({display: 'none'})}
 `;
 
 const Right = styled.div`
@@ -89,16 +89,16 @@ const Footer = () => {
           believable.
         </Desc>
         <SocialContainer>
-          <SocialIcon color="3B5999">
+          <SocialIcon color='3B5999'>
             <Facebook />
           </SocialIcon>
-          <SocialIcon  color="E4405F">
+          <SocialIcon  color='E4405F'>
             <Instagram />
           </SocialIcon>
-          <SocialIcon  color="55ACEE">
+          <SocialIcon  color='55ACEE'>
             <Twitter />
           </SocialIcon>
-          <SocialIcon  color="E60023">
+          <SocialIcon  color='E60023'>
             <Pinterest />
           </SocialIcon>
         </SocialContainer>
