@@ -180,7 +180,6 @@ const Cart = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        console.log(BASE_URL);
         const response = await userRequest.post(`${BASE_URL}checkout/payment`, {
           tokenId: stripeToken.id,
           amount: cart.total * 100,

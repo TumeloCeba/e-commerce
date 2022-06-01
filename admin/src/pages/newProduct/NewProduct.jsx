@@ -21,8 +21,6 @@ export default function NewProduct() {
     })
   };
 
-  console.log('inputs ', inputs, '\ncategory', cat);
-
   const handleCategories = (event) => {
     setCat(event.target.value.split(','));
   };
@@ -33,8 +31,6 @@ export default function NewProduct() {
     const storage = getStorage(firebaseApp);
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
-    console.log('fileName ', fileName);
 
     uploadTask.on('state_changed', 
       (snapshot) => {
@@ -68,7 +64,6 @@ export default function NewProduct() {
   );
 };
 
-  console.log('NewProduct', file);
   return (
     <div className='newProduct'>
       <h1 className='addProductTitle'>New Product</h1>

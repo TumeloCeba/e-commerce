@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require('cors');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const userRoute = require('./routes/user');
 const productRoute = require('./routes/product');
@@ -17,9 +18,16 @@ dotenv.config({
   path: "./config.env",
 });
 
+const buildPath = path.join(__dirname, 'client', 'build');
+
+console.log('build folder: ', buildPath);
+
+app.use(express.static(buildPath));
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors())
+app.use(cors());
+
 const connetionString = process.env.DATABASE_URL.replace(
   "<password>",
   process.env.DATABASE_PASSWORD
@@ -41,7 +49,13 @@ app.use('/api/orders', orderRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/checkout',checkoutRoute);
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log("Backend Server Running");
+app.get('*', (request, response) => {
+  response.sendFile(path.join(buildPath, 'index.html'));
+});
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
+  console.log(`Backend Server Running on ${port}`);
 });
 

@@ -12,15 +12,13 @@ export default function FeaturedInfo() {
     const getIncome = async () => {
       try{
         const response = await userRequest.get('/orders/income');
-        //console.log('income0', response.data.data.income);
         setIncome(response.data.data.income);
         setPercentage((response.data.data.income[1].total * 100) / response.data.data.income[0].total - 100);
-        //console.log('percentage0', response.data.data[1]);
       } catch(error){
         console.log(error);
       }
     }
-    console.log('here');
+    
     getIncome();
   },[])
 

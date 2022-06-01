@@ -89,8 +89,6 @@ export default function UserList() {
     },
   ];
 
-  console.log('users ', users);
-
   return (
     
     users && <div className="userList">

@@ -2,7 +2,6 @@ import {
   loginFailure,
   loginStart,
   loginSuccess,
-  logoutFailure,
   logoutStart,
   logoutSuccess,
 } from './userRedux';

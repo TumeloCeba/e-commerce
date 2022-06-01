@@ -21,7 +21,6 @@ function App() {
     console.log(error);
   }
 
-  //console.log(admin);
   return (
     <Router>
       <Switch>

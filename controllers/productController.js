@@ -16,7 +16,6 @@ exports.createProduct = catchAsync(async (request, response, next) => {
 exports.updateProduct = catchAsync(async (request, response, next) => {
   const { status, updatedAt, ...updateProductBody } = request.body;
 
-  console.log(request.body);
   const updatedProduct = await Product.findByIdAndUpdate(
     request.params.id,
     updateProductBody,
@@ -69,8 +68,6 @@ exports.getAllProducts = catchAsync(async (request, response, next) => {
   } else {
     products = await Product.find();
   }
-
-  //console.log('api products', products);
 
   response.status(200).json({
     status: "success",

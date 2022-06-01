@@ -40,7 +40,6 @@ export default function User() {
   };
 
   const handleClick = (event) => {
-    console.log('click');
     event.preventDefault();
 
     const updatedUser = {...inputs, /*img: downloadURL, categories: cat*/};

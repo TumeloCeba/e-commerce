@@ -14,7 +14,6 @@ const productSlice = createSlice({
       state.error = false;
     },
     getProductSuccess: (state, action) => {
-      //console.log('getProductSuccess', action.payload)
       state.isFetching = false;
       state.products = action.payload;
     },

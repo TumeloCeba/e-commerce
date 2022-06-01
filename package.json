@@ -4,7 +4,8 @@
   "description": "This is the api that will be used for the spice zone web app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "build": "npm install && (cd client && react-scripts build)"
   },
   "author": "Tumelo Ceba",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.3",
+    "path": "^0.12.7",
     "stripe": "^8.205.0",
     "validator": "^13.7.0"
   }

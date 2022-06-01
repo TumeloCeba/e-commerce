@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import Error from '../components/Error';
 import Newsletter from '../components/Newsletter';
 import { mobile } from '../responsive';
 import { publicRequest, userRequest } from '../requestMethods';
